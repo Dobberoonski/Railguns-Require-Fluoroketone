@@ -3,7 +3,7 @@
 local newAmmoCategory = {type="ammo-category", name="disabled"}
 local og_railgunAmmo = data.raw["ammo"]["railgun-ammo"]
 local railgunAmmo = table.deepcopy(og_railgunAmmo)
-railgunAmmo.name = "fluoro-".. og_railgunAmmo.name
+railgunAmmo.name = "fluoro-".. og_railgunAmmo.name--fluoro-railgun-ammo
 railgunAmmo.icons = {
     {
         icon = og_railgunAmmo.icon,
@@ -36,7 +36,7 @@ railgunAmmoRecipe.results = {
 --[[Assembly Machine (Compound Entity, Hidden)]]
 local og_ass3 = data.raw["assembling-machine"]["assembling-machine-3"]
 local ass3 = table.deepcopy(og_ass3)
-ass3.name = "fluoro-".. og_ass3.name
+ass3.name = "fluoro-".. og_ass3.name--fluoro-assembling-machine-3
 ass3.minable.result = ass3.name
 ass3.surface_conditions = nil
 ass3.fixed_recipe = railgunAmmoRecipe.name
@@ -478,6 +478,7 @@ ass3.fluid_boxes = {
     },
 }--//ass3.fluid_boxes
 ass3.module_slots = 0
+ass3.vector_to_place_result = {0, -2}
 
 local og_ass3Recipe = data.raw["recipe"]["assembling-machine-3"]
 local ass3Recipe = table.deepcopy(og_ass3Recipe)
@@ -498,6 +499,7 @@ ass3Item.icons = {
 ass3Item.place_result = ass3.name
 
 --[[Railgun (Compound Entity, Parent)]]
+--TODO: set building-direction-8-way to nil on railgun properties to prevent diagonal rotations
 local og_railgun = data.raw["ammo-turret"]["railgun-turret"]
 og_railgun.created_effect = {
     type = "direct",
