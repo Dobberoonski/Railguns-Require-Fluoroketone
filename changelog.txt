@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.0
-Date: ddmmmyyyy
+Date: 13AUG2025
   Major Features:
     - Initial mod release!!
     - Railguns now need to be fed cold fluoroketone to operate properly, as originally conceived of in FFF-432
