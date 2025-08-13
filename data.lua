@@ -479,6 +479,19 @@ ass3.fluid_boxes = {
 }--//ass3.fluid_boxes
 ass3.module_slots = 0
 ass3.vector_to_place_result = {0, -2}
+--Properties to make hidden/uninteractable
+ass3.heating_energy = "0W"
+ass3.selectable_in_game = false
+ass3.allow_copy_paste = false
+ass3.flags = {
+    --"hide-alt-info",
+    "not-on-map",
+    "not-deconstructable",
+    "not-blueprintable",
+    "not-in-made-in",
+    "not-upgradable",
+    "not-repairable"
+}
 
 local og_ass3Recipe = data.raw["recipe"]["assembling-machine-3"]
 local ass3Recipe = table.deepcopy(og_ass3Recipe)
