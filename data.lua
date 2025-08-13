@@ -32,6 +32,8 @@ railgunAmmoRecipe.results = {
     {type="item", name=railgunAmmoRecipe.name, amount=1},
     {type="fluid", name="fluoroketone-hot", amount=1}
 }
+railgunAmmoRecipe.hide_from_stats = true
+railgunAmmoRecipe.hide_from_player_crafting = true
 
 --[[Assembly Machine (Compound Entity, Hidden)]]
 local og_ass3 = data.raw["assembling-machine"]["assembling-machine-3"]
@@ -492,12 +494,15 @@ ass3.flags = {
     "not-upgradable",
     "not-repairable"
 }
+ass3.graphics_set = nil
 
 local og_ass3Recipe = data.raw["recipe"]["assembling-machine-3"]
 local ass3Recipe = table.deepcopy(og_ass3Recipe)
 ass3Recipe.name = ass3.name
 ass3Recipe.results = {{type="item", name=ass3.name, amount=1}}
-ass3Recipe.enabled = true--for testing only
+ass3Recipe.enabled = false--for testing only
+ass3Recipe.hide_from_stats = true
+ass3Recipe.hide_from_player_crafting = true
 
 local og_ass3Item = data.raw["item"]["assembling-machine-3"]
 local ass3Item = table.deepcopy(og_ass3Item)
