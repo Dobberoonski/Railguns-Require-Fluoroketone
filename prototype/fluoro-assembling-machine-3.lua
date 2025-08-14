@@ -1,6 +1,5 @@
-local og_ass3 = data.raw["assembling-machine"]["assembling-machine-3"]
-local ass3 = table.deepcopy(og_ass3)
-ass3.name = "fluoro-".. og_ass3.name--fluoro-assembling-machine-3
+local ass3 = table.deepcopy(data.raw["assembling-machine"]["assembling-machine-3"])
+ass3.name = "fluoro-".. ass3.name--fluoro-assembling-machine-3
 ass3.minable.result = ass3.name
 ass3.surface_conditions = nil
 ass3.fixed_recipe = "fluoro-railgun-ammo"--defined in fluoro-railgun-ammo.lua
@@ -458,21 +457,19 @@ ass3.flags = {
 }
 ass3.graphics_set = nil
 
-local og_ass3Recipe = data.raw["recipe"]["assembling-machine-3"]
-local ass3Recipe = table.deepcopy(og_ass3Recipe)
+local ass3Recipe = table.deepcopy(data.raw["recipe"]["assembling-machine-3"])
 ass3Recipe.name = ass3.name
 ass3Recipe.results = {{type="item", name=ass3.name, amount=1}}
-ass3Recipe.enabled = false--for testing only
+ass3Recipe.enabled = false
 ass3Recipe.hide_from_stats = true
 ass3Recipe.hide_from_player_crafting = true
 
-local og_ass3Item = data.raw["item"]["assembling-machine-3"]
-local ass3Item = table.deepcopy(og_ass3Item)
+local ass3Item = table.deepcopy(data.raw["item"]["assembling-machine-3"])
 ass3Item.name = ass3.name
 ass3Item.icons = {
     {
-        icon = og_ass3.icon,
-        icon_size = og_ass3.icon_size,
+        icon = ass3.icon,
+        icon_size = ass3.icon_size,
         tint = {r=0.3,g=0,b=0.3,a=0.3}
     },
 }
