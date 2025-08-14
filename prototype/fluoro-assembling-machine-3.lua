@@ -496,7 +496,7 @@ for k,v in pairs(ass3nw.fluid_boxes) do
             {
                 direction = defines.direction.south,
                 flow_direction = "output",
-                position = {-1, 1}
+                position = {0, 1}--old {1, 1}
             }
         }
     end
@@ -519,7 +519,7 @@ for k,v in pairs(ass3ne.fluid_boxes) do
             {
                 direction = defines.direction.south,
                 flow_direction = "output",
-                position = {1, 1}
+                position = {0, 1}--old {1, 1}
             }
         }
     end
@@ -542,7 +542,7 @@ for k,v in pairs(ass3sw.fluid_boxes) do
             {
                 direction = defines.direction.south,
                 flow_direction = "output",
-                position = {1, 1}
+                position = {0, 1}--old {1, 1}
             }
         }
     end
@@ -565,7 +565,7 @@ for k,v in pairs(ass3se.fluid_boxes) do
             {
                 direction = defines.direction.south,
                 flow_direction = "output",
-                position = {-1, 1}
+                position = {0, 1}--old {-1, 1}
             }
         }
     end

@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.3
+Date: 14AUG2025
+  Changes:
+    - Moved hot fluoroketone outputs over 1 tile on each diagonal railgun to match pipe spacing with the orthogonal railguns.
+  NOTE:
+    - IF YOU ALREADY BUILT DIAGONAL RAILGUNS AND DO NOT WANT TO RE-ROUTE YOUR PIPE CONNECTIONS THEN UNCHECK "USE NEW DIAGONAL CONNECTIONS" IN MOD SETTINGS!
+---------------------------------------------------------------------------------------------------
 Version: 1.1.2
 Date: 14AUG2025
   Hotfix:
