@@ -453,7 +453,8 @@ ass3.flags = {
     "not-blueprintable",
     "not-in-made-in",
     "not-upgradable",
-    "not-repairable"
+    "not-repairable",
+    "no-automated-item-removal"
 }
 ass3.graphics_set = nil
 

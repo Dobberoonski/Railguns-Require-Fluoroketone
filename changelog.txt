@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.1
+Date: 14AUG2025
+  Hotfix:
+    - Added "no-automated-item-removal" flag to the railgun and internal assembler to prevent cheesing the railgun cooling mechanic.
+  NOTE:
+    - IF YOU ALREADY BUILT DIAGONAL RAILGUNS AND DO NOT WANT TO RE-ROUTE YOUR PIPE CONNECTIONS THEN UNCHECK "USE NEW DIAGONAL CONNECTIONS" IN MOD SETTINGS!
+---------------------------------------------------------------------------------------------------
 Version: 1.1.0
 Date: 14AUG2025
   Minor Features:
