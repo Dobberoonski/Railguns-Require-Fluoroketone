@@ -1,4 +1,6 @@
 --control.lua
+local useNewDiagonalConnections = settings.startup["use-new-diagonal-connections"].value
+
 local function RailgunsRequireFluoroketone_Init()
     --RailgunsRequireFluoroketone_Init : ->
     if not storage.fluoroAssemblers then
@@ -6,7 +8,22 @@ local function RailgunsRequireFluoroketone_Init()
     end
 end
 
+local function old_IHATEROTATIONSGODDAMN(direction)
+    --This function is provided for backwards compatibility with v1.0.0
+    --old_IHATEROTATIONSGODDAMN : defines.direction -> x, y
+    if direction == defines.direction.north then return 0, 1
+    elseif direction == defines.direction.east then return -1, 0
+    elseif direction == defines.direction.south then return 0, -1
+    elseif direction == defines.direction.west then return 1, 0
+    --railguns can rotate in 8 directions. Lucky me.
+    elseif direction == defines.direction.northeast or direction == defines.direction.northwest then return 0, 1
+    elseif direction == defines.direction.southeast or direction == defines.direction.southwest then return 0, -1
+    end
+end
+
 local function IHATEROTATIONSGODDAMN(direction)
+    --Backwards compatibility with v1.0.0
+    if not useNewDiagonalConnections then return old_IHATEROTATIONSGODDAMN(direction) end
     --IHATEROTATIONSGODDAMN : defines.direction -> x, y
     if direction == defines.direction.north then return 0, 1
     elseif direction == defines.direction.east then return -1, 0
@@ -35,6 +52,7 @@ end
 
 local function LOOKINGOODCALLHR(direction)
     --LOOKINGOODCALLHR : defines.direction -> string
+    if not useNewDiagonalConnections then return "" end
     if direction == defines.direction.northwest then return "nw-" end
     if direction == defines.direction.northeast then return "ne-" end
     if direction == defines.direction.southwest then return "sw-" end

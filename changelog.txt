@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.0
+Date: 14AUG2025
+  Minor Features:
+    - Made diagonal railgun pipe connections neater.
+  NOTE:
+    - IF YOU ALREADY BUILT DIAGONAL RAILGUNS AND DO NOT WANT TO RE-ROUTE YOUR PIPE CONNECTIONS THEN UNCHECK "USE NEW DIAGONAL CONNECTIONS" IN MOD SETTINGS!
+---------------------------------------------------------------------------------------------------
 Version: 1.0.0
 Date: 13AUG2025
   Major Features:
