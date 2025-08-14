@@ -476,3 +476,98 @@ ass3Item.icons = {
 ass3Item.place_result = ass3.name
 
 data:extend{ass3, ass3Recipe, ass3Item}
+
+--[[Modified hidden assemblers for diagonal pipe connections]]
+local ass3nw = table.deepcopy(data.raw["assembling-machine"][ass3.name])
+ass3nw.name = "nw-".. ass3nw.name
+for k,v in pairs(ass3nw.fluid_boxes) do
+    if v.production_type == "input" then
+        v.pipe_connections = {
+            {
+                direction = defines.direction.east,
+                flow_direction = "input",
+                position = {1, 0}
+            }
+        }
+    end
+    if v.production_type == "output" then
+        v.pipe_connections = {
+            {
+                direction = defines.direction.south,
+                flow_direction = "output",
+                position = {-1, 1}
+            }
+        }
+    end
+end
+
+local ass3ne = table.deepcopy(data.raw["assembling-machine"][ass3.name])
+ass3ne.name = "ne-".. ass3ne.name
+for k,v in pairs(ass3ne.fluid_boxes) do
+    if v.production_type == "input" then
+        v.pipe_connections = {
+            {
+                direction = defines.direction.west,
+                flow_direction = "input",
+                position = {-1, 0}
+            }
+        }
+    end
+    if v.production_type == "output" then
+        v.pipe_connections = {
+            {
+                direction = defines.direction.south,
+                flow_direction = "output",
+                position = {1, 1}
+            }
+        }
+    end
+end
+
+local ass3sw = table.deepcopy(data.raw["assembling-machine"][ass3.name])
+ass3sw.name = "sw-".. ass3sw.name
+for k,v in pairs(ass3sw.fluid_boxes) do
+    if v.production_type == "input" then
+        v.pipe_connections = {
+            {
+                direction = defines.direction.west,
+                flow_direction = "input",
+                position = {-1, 0}
+            }
+        }
+    end
+    if v.production_type == "output" then
+        v.pipe_connections = {
+            {
+                direction = defines.direction.south,
+                flow_direction = "output",
+                position = {1, 1}
+            }
+        }
+    end
+end
+
+local ass3se = table.deepcopy(data.raw["assembling-machine"][ass3.name])
+ass3se.name = "se-".. ass3se.name
+for k,v in pairs(ass3se.fluid_boxes) do
+    if v.production_type == "input" then
+        v.pipe_connections = {
+            {
+                direction = defines.direction.east,
+                flow_direction = "input",
+                position = {1, 0}
+            }
+        }
+    end
+    if v.production_type == "output" then
+        v.pipe_connections = {
+            {
+                direction = defines.direction.south,
+                flow_direction = "output",
+                position = {-1, 1}
+            }
+        }
+    end
+end
+
+data:extend{ass3nw, ass3ne, ass3sw, ass3se}

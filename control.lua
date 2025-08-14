@@ -15,8 +15,10 @@ local function IHATEROTATIONSGODDAMN(direction)
     --[[railguns can rotate in 8 directions. Lucky me.
     --I could just disable the 8 way rotation flag in the railguns prototype.
     --I thought about that a lot.]]
-    elseif direction == defines.direction.northeast or direction == defines.direction.northwest then return 0, 1
-    elseif direction == defines.direction.southeast or direction == defines.direction.southwest then return 0, -1
+    elseif direction == defines.direction.northwest then return 1, 1
+    elseif direction == defines.direction.northeast then return -1, 1
+    elseif direction == defines.direction.southeast then return -1, -1
+    elseif direction == defines.direction.southwest then return 1, -1
     end
 end
 
@@ -31,6 +33,15 @@ local function IHATEDIRECTIONSTOOFUCK(direction)
     end
 end
 
+local function LOOKINGOODCALLHR(direction)
+    --LOOKINGOODCALLHR : defines.direction -> string
+    if direction == defines.direction.northwest then return "nw-" end
+    if direction == defines.direction.northeast then return "ne-" end
+    if direction == defines.direction.southwest then return "sw-" end
+    if direction == defines.direction.southeast then return "se-" end
+    return ""
+end
+
 script.on_init(RailgunsRequireFluoroketone_Init)
 script.on_configuration_changed(RailgunsRequireFluoroketone_Init)
 
@@ -39,7 +50,7 @@ script.on_event(defines.events.on_script_trigger_effect, function(event)
     local railgun = event.source_entity
     local offsetX, offsetY = IHATEROTATIONSGODDAMN(railgun.direction)
     local ass3 = game.get_surface(event.surface_index).create_entity{
-        name = "fluoro-assembling-machine-3",
+        name = LOOKINGOODCALLHR(railgun.direction).. "fluoro-assembling-machine-3",
         position = {
             railgun.position.x + offsetX,
             railgun.position.y + offsetY
