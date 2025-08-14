@@ -82,8 +82,9 @@ script.on_event(defines.events.on_script_trigger_effect, function(event)
     storage.fluoroAssemblers[key] = ass3
 end)
 
-if script.active_mods["maraxsis"] then
-    require("runtime/compatability_on_object_destroyed")
-else
-    require("runtime/on_object_destroyed")
-end
+script.on_event(defines.events.on_object_destroyed, function(event)
+    local key = event.registration_number
+    if not storage.fluoroAssemblers[key] then return end--prevent potential mod incompatibilities
+    storage.fluoroAssemblers[key].destroy()
+    storage.fluoroAssemblers[key] = nil
+end)
