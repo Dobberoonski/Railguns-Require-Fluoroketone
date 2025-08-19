@@ -458,13 +458,6 @@ ass3.flags = {
 }
 ass3.graphics_set = nil
 
-local ass3Recipe = table.deepcopy(data.raw["recipe"]["assembling-machine-3"])
-ass3Recipe.name = ass3.name
-ass3Recipe.results = {{type="item", name=ass3.name, amount=1}}
-ass3Recipe.enabled = false
-ass3Recipe.hide_from_stats = true
-ass3Recipe.hide_from_player_crafting = true
-
 local ass3Item = table.deepcopy(data.raw["item"]["assembling-machine-3"])
 ass3Item.name = ass3.name
 ass3Item.icons = {
@@ -476,7 +469,7 @@ ass3Item.icons = {
 }
 ass3Item.place_result = ass3.name
 
-data:extend{ass3, ass3Recipe, ass3Item}
+data:extend{ass3, ass3Item}
 
 --[[Modified hidden assemblers for diagonal pipe connections]]
 local ass3nw = table.deepcopy(data.raw["assembling-machine"][ass3.name])

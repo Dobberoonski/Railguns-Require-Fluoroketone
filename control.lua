@@ -1,37 +1,56 @@
---control.lua
-local useNewDiagonalConnections = settings.startup["use-new-diagonal-connections"].value
+storage.fluoroAssemblers = storage.fluoroAssemblers or {}
 
-local function RailgunsRequireFluoroketone_Init()
-    --RailgunsRequireFluoroketone_Init : ->
-    if not storage.fluoroAssemblers then
-        storage.fluoroAssemblers = {}
+--[[Abstract Railgun Layout]]
+local railgunLayout = {}
+function railgunLayout:new()
+    obj = obj or {}
+    setmetatable(obj, self)
+    self.__index = self
+    return obj
+end
+function railgunLayout:setDirection(direction)
+    if direction == defines.direction.northwest then return defines.direction.north
+    elseif direction == defines.direction.northeast then return defines.direction.north
+    elseif direction == defines.direction.southeast then return defines.direction.south
+    elseif direction == defines.direction.southwest then return defines.direction.south
+    else return direction
     end
 end
+function railgunLayout:setName(direction) end--virtual
+function railgunLayout:setPosition(direction) end--virtual
 
-local function old_IHATEROTATIONSGODDAMN(direction)
-    --This function is provided for backwards compatibility with v1.0.0
-    --old_IHATEROTATIONSGODDAMN : defines.direction -> x, y
+--[[Old Layout from v1.0.0]]
+local oldLayout = railgunLayout:new()
+function oldLayout:setName(direction)
+    return ""
+end
+function oldLayout:setPosition(direction)
     if direction == defines.direction.north then return 0, 1
     elseif direction == defines.direction.east then return -1, 0
     elseif direction == defines.direction.south then return 0, -1
     elseif direction == defines.direction.west then return 1, 0
-    --railguns can rotate in 8 directions. Lucky me.
-    elseif direction == defines.direction.northeast or direction == defines.direction.northwest then return 0, 1
-    elseif direction == defines.direction.southeast or direction == defines.direction.southwest then return 0, -1
+    elseif direction == defines.direction.northwest then return 0, 1
+    elseif direction == defines.direction.northeast then return 0, 1
+    elseif direction == defines.direction.southeast then return 0, -1
+    elseif direction == defines.direction.southwest then return 0, -1
     end
 end
 
-local function IHATEROTATIONSGODDAMN(direction)
-    --Backwards compatibility with v1.0.0
-    if not useNewDiagonalConnections then return old_IHATEROTATIONSGODDAMN(direction) end
-    --IHATEROTATIONSGODDAMN : defines.direction -> x, y
+--[[Default Layout]]
+local defaultLayout = railgunLayout:new()
+function defaultLayout:setName(direction)
+    if direction == defines.direction.northwest then return "nw-"
+    elseif direction == defines.direction.northeast then return "ne-"
+    elseif direction == defines.direction.southwest then return "sw-"
+    elseif direction == defines.direction.southeast then return "se-"
+    else return ""
+    end
+end
+function defaultLayout:setPosition(direction)
     if direction == defines.direction.north then return 0, 1
     elseif direction == defines.direction.east then return -1, 0
     elseif direction == defines.direction.south then return 0, -1
     elseif direction == defines.direction.west then return 1, 0
-    --[[railguns can rotate in 8 directions. Lucky me.
-    --I could just disable the 8 way rotation flag in the railguns prototype.
-    --I thought about that a lot.]]
     elseif direction == defines.direction.northwest then return 1, 1
     elseif direction == defines.direction.northeast then return -1, 1
     elseif direction == defines.direction.southeast then return -1, -1
@@ -39,41 +58,23 @@ local function IHATEROTATIONSGODDAMN(direction)
     end
 end
 
-local function IHATEDIRECTIONSTOOFUCK(direction)
-    --IHATEDIRECTIONSTOOFUCK : defines.direction - > defines.direction
-    if direction == defines.direction.northeast or direction == defines.direction.northwest then
-        return defines.direction.north
-    elseif direction == defines.direction.southeast or direction == defines.direction.southwest then
-        return defines.direction.south
-    else
-        return direction
-    end
-end
-
-local function LOOKINGOODCALLHR(direction)
-    --LOOKINGOODCALLHR : defines.direction -> string
-    if not useNewDiagonalConnections then return "" end
-    if direction == defines.direction.northwest then return "nw-" end
-    if direction == defines.direction.northeast then return "ne-" end
-    if direction == defines.direction.southwest then return "sw-" end
-    if direction == defines.direction.southeast then return "se-" end
-    return ""
-end
-
-script.on_init(RailgunsRequireFluoroketone_Init)
-script.on_configuration_changed(RailgunsRequireFluoroketone_Init)
+--[[Select which layout to use depending on mod settings]]
+local layout
+local railgunLayoutOption = settings.startup["railgun-layout"].value
+if railgunLayoutOption == "Old v1.0.0" then layout = oldLayout:new() end
+if railgunLayoutOption == "Default" then layout = defaultLayout:new() end
 
 script.on_event(defines.events.on_script_trigger_effect, function(event)
     if event.effect_id ~= "railgun-turret" then return end
     local railgun = event.source_entity
-    local offsetX, offsetY = IHATEROTATIONSGODDAMN(railgun.direction)
+    local offsetX, offsetY = layout:setPosition(railgun.direction)
     local ass3 = game.get_surface(event.surface_index).create_entity{
-        name = LOOKINGOODCALLHR(railgun.direction).. "fluoro-assembling-machine-3",
+        name = layout:setName(railgun.direction).. "fluoro-assembling-machine-3",
         position = {
             railgun.position.x + offsetX,
             railgun.position.y + offsetY
         },
-        direction = IHATEDIRECTIONSTOOFUCK(railgun.direction),
+        direction = layout:setDirection(railgun.direction),
         force = railgun.force
     }
     ass3.destructible = false
