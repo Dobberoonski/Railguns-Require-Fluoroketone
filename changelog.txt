@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.4
+Date: 25AUG2025
+  Code Refactor:
+    - Delegated compound entity layouts to subfolders for ease of maintenance and future custom additions.
+    - Consolidated data.lua and control.lua
+---------------------------------------------------------------------------------------------------
 Version: 1.1.3
 Date: 14AUG2025
   Changes:
