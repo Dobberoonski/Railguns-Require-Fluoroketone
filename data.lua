@@ -3,19 +3,14 @@ local function setPipeConn(str)
     end
 end
 
-local function setSourceEffects(effectID)
-    --curried helper function
-    return {type="script", effect_id=effectID}
-end
-
-local function setActionDelivery(effectID)
-    --curried helper function
-    return {type="instant", source_effects=setSourceEffects(effectID)}
-end
-
 local function setOnScriptTriggerEffect(effectID)
-    --setOnScriptTriggerEffect : string -> DirectTriggerItem
-    return {type="direct", action_delivery=setActionDelivery(effectID)}
+    function setSourceEffects()
+        return {type="script", effect_id=effectID}
+    end
+    function setActionDelivery()
+        return {type="instant", source_effects=setSourceEffects()}
+    end
+    return {type="direct", action_delivery=setActionDelivery()}
 end
 
 --[[Fluoro-Railgun ammo]]

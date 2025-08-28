@@ -5,7 +5,7 @@ Date: 28AUG2025
     - Changed hidden assembler's energy source to "void" type; it no longer requires 1W of power to operate.
     - Removed hidden assembler's no power/network connection icons.
   Code Refactor:
-    - Railgun.created_effect delegated to curried functions. Nested brackets are gross!
+    - Railgun.created_effect delegated to closures.
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.4
 Date: 25AUG2025
