@@ -3,6 +3,21 @@ local function setPipeConn(str)
     end
 end
 
+local function setSourceEffects(effectID)
+    --curried helper function
+    return {type="script", effect_id=effectID}
+end
+
+local function setActionDelivery(effectID)
+    --curried helper function
+    return {type="instant", source_effects=setSourceEffects(effectID)}
+end
+
+local function setOnScriptTriggerEffect(effectID)
+    --setOnScriptTriggerEffect : string -> DirectTriggerItem
+    return {type="direct", action_delivery=setActionDelivery(effectID)}
+end
+
 --[[Fluoro-Railgun ammo]]
 local newAmmoCategory = {type="ammo-category", name="disabled"}
 local og_railgunAmmo = data.raw["ammo"]["railgun-ammo"]
@@ -18,11 +33,10 @@ railgunAmmo.icons = {
 og_railgunAmmo.ammo_category = newAmmoCategory.name--disable usage of railgun-ammo
 
 local newRecipeCategory = {type="recipe-category", name="fluoro-crafting"}
-local og_railgunAmmoRecipe = data.raw["recipe"]["railgun-ammo"]
-local railgunAmmoRecipe = table.deepcopy(og_railgunAmmoRecipe)
+local railgunAmmoRecipe = table.deepcopy(data.raw["recipe"]["railgun-ammo"])
 railgunAmmoRecipe.name = railgunAmmo.name
 railgunAmmoRecipe.icon = railgunAmmo.icon--required for recipies with many outputs
-railgunAmmoRecipe.category = "fluoro-crafting"
+railgunAmmoRecipe.category = newRecipeCategory.name
 railgunAmmoRecipe.surface_conditions = nil
 railgunAmmoRecipe.allow_productivity = false
 railgunAmmoRecipe.energy_required = 0.5
@@ -49,11 +63,10 @@ ass3.surface_conditions = nil
 ass3.fixed_recipe = railgunAmmo.name
 ass3.crafting_categories = {newRecipeCategory.name}
 ass3.energy_source = {
-    type = "electric",
-    usage_priority = "secondary-input",
-    drain = "0W"
+    type = "void",
+    render_no_power_icon = false,
+    render_no_network_icon = false
 }
-ass3.energy_usage = "1W"
 ass3.fluid_boxes = {
     {
         production_type = "input",
@@ -75,7 +88,7 @@ ass3.fluid_boxes = {
         pipe_picture_frozen = pipe_gfx.pipe_picture_frozen,
         secondary_draw_orders = {north=-1}
     },
-}--//ass3.fluid_boxes
+}
 ass3.module_slots = 0
 ass3.vector_to_place_result = {0, -2}
 --Properties to make hidden/uninteractable
@@ -139,14 +152,5 @@ data:extend{ass3nw, ass3ne, ass3sw, ass3se}
 
 --[[Railgun]]
 local og_railgun = data.raw["ammo-turret"]["railgun-turret"]
-og_railgun.created_effect = {
-    type = "direct",
-    action_delivery = {
-        type = "instant",
-        source_effects = {
-            type = "script",
-            effect_id = og_railgun.name--"railgun-turret"
-        }
-    }
-}
+og_railgun.created_effect = setOnScriptTriggerEffect(og_railgun.name)
 table.insert(og_railgun.flags, "no-automated-item-removal")
