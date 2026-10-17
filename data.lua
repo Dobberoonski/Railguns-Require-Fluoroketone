@@ -31,7 +31,7 @@ local newRecipeCategory = {type="recipe-category", name="fluoro-crafting"}
 local railgunAmmoRecipe = table.deepcopy(data.raw["recipe"]["railgun-ammo"])
 railgunAmmoRecipe.name = railgunAmmo.name
 railgunAmmoRecipe.icon = railgunAmmo.icon--required for recipies with many outputs
-railgunAmmoRecipe.category = newRecipeCategory.name
+railgunAmmoRecipe.categories = {newRecipeCategory.name}--category:str\categories:table:str
 railgunAmmoRecipe.surface_conditions = nil
 railgunAmmoRecipe.allow_productivity = false
 railgunAmmoRecipe.energy_required = 0.5
@@ -100,6 +100,7 @@ ass3.flags = {
     "no-automated-item-removal"
 }
 ass3.graphics_set = nil
+ass3.hidden_in_factoriopedia = true--NEW
 
 local ass3Item = table.deepcopy(data.raw["item"]["assembling-machine-3"])
 ass3Item.name = ass3.name

@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.6
+Date: 17OCT2026
+  Minor Fix:
+    - Added proper locale key for hidden assembler
+    - Fixed 'Gathered from' appearance in factoriopedia
+---------------------------------------------------------------------------------------------------
 Version: 1.1.5
 Date: 28AUG2025
   Minor Fix:
