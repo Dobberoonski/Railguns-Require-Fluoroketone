@@ -150,3 +150,8 @@ data:extend{ass3nw, ass3ne, ass3sw, ass3se}
 local og_railgun = data.raw["ammo-turret"]["railgun-turret"]
 og_railgun.created_effect = setOnScriptTriggerEffect(og_railgun.name)
 table.insert(og_railgun.flags, "no-automated-item-removal")
+--[[Mod Compatibility]]
+--secretas
+local goldrailgunturret = data.raw["ammo-turret"]["gold-railgun-turret"]
+goldrailgunturret.created_effect = setOnScriptTriggerEffect(goldrailgunturret.name)
+table.insert(goldrailgunturret.flags, "no-automated-item-removal")

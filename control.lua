@@ -9,7 +9,9 @@ end
 local layout = setLayout(settings.startup["railgun-layout"].value)
 
 script.on_event(defines.events.on_script_trigger_effect, function(event)
-    if event.effect_id ~= "railgun-turret" then return end
+    --if event.effect_id ~= "railgun-turret" then return end
+    --mod compatibility that changes the railgun name, e.g. Secretas&Frozeta: "gold-railgun-turret"
+    if not string.match(event.effect_id, "railgun%-turret") then return end
     local railgun = event.source_entity
     local offsetX, offsetY = layout.setPosition(railgun.direction)
     local ass3 = game.get_surface(event.surface_index).create_entity{
